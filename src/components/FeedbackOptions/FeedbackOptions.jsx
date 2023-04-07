@@ -8,18 +8,18 @@ export class FeedbackOptions extends Component {
 
     return (
       <div className={styles.card}>
-        <h2> Please leave feedback</h2>
-
         <div className={styles.buttonsMenu}>
-          <button type="button" onClick={()=> onLeaveFeedback(options.INCREASE_GOOD)}>
-            good
-          </button>
-          <button type="button" onClick={()=>onLeaveFeedback(options.INCREASE_NEUTRAL)}>
-            neutral
-          </button>
-          <button type="button" onClick={()=>onLeaveFeedback(options.INCREASE_BAD)}>
-            bad
-          </button>
+          {options.map(option => {
+            return (
+              <button
+                type="button"
+                key={option}
+                onClick={() => onLeaveFeedback(option)}
+              >
+                {option}
+              </button>
+            );
+          })}
         </div>
       </div>
     );
