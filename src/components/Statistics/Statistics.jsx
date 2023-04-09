@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import styles from './Statistics.module.css';
 
@@ -11,7 +12,7 @@ export class Statistics extends Component {
 
     const getQuantity = item => {
       if (item === positivePercentage) {
-        return good > 0 ? `${item} %` : 0;
+        return positivePercentage > 0 ? `${positivePercentage} %` : 0;
       }
       return item;
     };
@@ -34,3 +35,10 @@ export class Statistics extends Component {
     );
   }
 }
+
+Statistics.propTypes = {
+  good: PropTypes.number.isRequired,
+  neutral: PropTypes.number.isRequired,
+  total: PropTypes.number.isRequired,
+  positivePercentage: PropTypes.number.isRequired,
+};
