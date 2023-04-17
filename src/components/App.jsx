@@ -1,5 +1,5 @@
 import { Statistics, FeedbackOptions, Section, Notification } from 'components';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 
 import styles from './App.module.css';
 
@@ -7,10 +7,14 @@ export const App = () => {
   const [counters, setCounters] = useState({ good: 0, neutral: 0, bad: 0 });
   const { good, neutral, bad } = counters;
 
-  const countTotalFeedback = () => good + neutral + bad;
+  const countTotalFeedback = () =>
+    useMemo(() => good + neutral + bad, [good, neutral, bad]);
 
   const countPositiveFeedbackPercentage = () =>
-    Math.round((good / countTotalFeedback()) * 100);
+    useMemo(
+      () => Math.round((good / countTotalFeedback()) * 100),
+      [good, neutral, bad]
+    );
 
   const onLeaveFeedback = option =>
     setCounters(prevCounters => ({
